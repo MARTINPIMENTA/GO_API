@@ -31,7 +31,7 @@ func allArticles(w http.ResponseWriter, r *http.Request) {
 }
 
 func testPostArticles(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "This also works")
+	fmt.Fprintf(w, "This also works, POST method")
 }
 
 func homePage(w http.ResponseWriter, r *http.Request) {
@@ -44,7 +44,7 @@ func handleRequests() {
 
 	myRouter.HandleFunc("/", homePage)
 	myRouter.HandleFunc("/articles", allArticles).Methods("GET")
-	myRouter.HandleFunc("/articlespost", testPostArticles).Methods("GET")
+	myRouter.HandleFunc("/articlespost", testPostArticles).Methods("POST")
 	log.Fatal(http.ListenAndServe(":8081", myRouter))
 }
 
