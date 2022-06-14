@@ -1,4 +1,4 @@
-package entities
+package lambda
 
 import "fmt"
 
