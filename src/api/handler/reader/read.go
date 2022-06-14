@@ -6,7 +6,7 @@ import (
 
 	"github.com/gorilla/mux"
 
-	"github.com/MARTINPIMENTA/pimen_rest_api_go/src/api/domain/article"
+	article "github.com/MARTINPIMENTA/pimen_rest_api_go/src/api/domain/article/delivery"
 	"github.com/MARTINPIMENTA/pimen_rest_api_go/src/api/domain/home"
 )
 
@@ -18,7 +18,7 @@ func HandleReadRequests() {
 	// home endpoint
 	myRouter.HandleFunc("/", home.HomePage)
 	// Get endpoint for articles
-	myRouter.HandleFunc("/articles", article.AllArticles).Methods("GET")
+	myRouter.HandleFunc("/articles", article.GetAllArticles).Methods("GET")
 	// Post endpoint for articles
 	myRouter.HandleFunc("/articles", article.PostArticles).Methods("POST")
 	log.Fatal(http.ListenAndServe(":8081", myRouter))

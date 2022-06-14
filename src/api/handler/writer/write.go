@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/MARTINPIMENTA/pimen_rest_api_go/src/api/domain/article"
+	article "github.com/MARTINPIMENTA/pimen_rest_api_go/src/api/domain/article/delivery"
 	"github.com/gorilla/mux"
 )
 
