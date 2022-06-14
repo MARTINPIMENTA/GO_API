@@ -3,16 +3,19 @@ package article
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"net/http"
 
+	articleEntities "github.com/MARTINPIMENTA/pimen_rest_api_go/src/api/domain/article/entities"
 	articleUsecase "github.com/MARTINPIMENTA/pimen_rest_api_go/src/api/domain/article/usecases"
 )
 
 // AllArticles returns the array of articles.
 func GetAllArticles(w http.ResponseWriter, r *http.Request) {
 	// Verify request is not empty
-	if r == nil {
-		fmt.Fprintf(w, "Empty request error")
+	err := verifyValidRequest(r)
+	if err != nil {
+		fmt.Fprintf(w, err.Error())
 		return
 	}
 
@@ -34,30 +37,50 @@ func GetAllArticles(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(articlesResponse)
 }
 
-// testPostArticles only returns a message, dummy func.
-// func PostArticles(w http.ResponseWriter, r *http.Request) {
-// 	article := new(articleEntities.Article)
+// PostArticles only returns a message.
+func PostArticles(w http.ResponseWriter, r *http.Request) {
+	// Verify request is not empty
+	err := verifyValidRequest(r)
+	if err != nil {
+		fmt.Fprintf(w, err.Error())
+		return
+	}
 
-// 	// Body error case
-// 	body, err := ioutil.ReadAll(r.Body)
-// 	if err != nil {
-// 		fmt.Fprintf(w, "Error formatting request")
-// 		return
-// 	}
+	// Body error case
+	body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		fmt.Fprintf(w, "Error formatting request")
+		return
+	}
 
-// 	// Unmarshal body error case
-// 	err = json.Unmarshal(body, article)
-// 	if err != nil {
-// 		fmt.Fprintf(w, "Body unmarshall error")
-// 		return
-// 	}
+	article := new(articleEntities.Article)
 
-// 	// Success
-// 	articles = append(articles, *article)
-// 	fmt.Fprintf(w, "Article Posted!")
-// }
+	// Unmarshal body error case
+	err = json.Unmarshal(body, article)
+	if err != nil {
+		fmt.Fprintf(w, "Body unmarshall error")
+		return
+	}
 
-/* func getRequestHeaders(r *http.Request) error {
-	// Get
+	// Go to usecase for article post.
+	err = articleUsecase.PostArticle(*article)
+	if err != nil {
+		fmt.Fprintf(w, err.Error())
+	}
 
-} */
+	// Success
+	fmt.Fprintf(w, "Article Posted!")
+}
+
+// getRequestHeaders gets request params from URL.
+/*func getRequestParams(r *http.Request) error {
+	// Get the value
+
+}*/
+
+func verifyValidRequest(r *http.Request) error {
+	if r == nil {
+		return fmt.Errorf("Request error")
+	}
+	return nil
+}

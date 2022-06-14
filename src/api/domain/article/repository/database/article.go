@@ -19,3 +19,16 @@ func GetAllArticlesFromDB() (articleEntities.Articles, error) {
 	return articlesResponse, nil
 
 }
+
+// PostArticleIntoDB inserts articles into DB.
+func PostArticleIntoDB(article articleEntities.Article) error {
+	initialLen := len(dummyDB)
+	dummyDB = append(dummyDB, article)
+	finalLen := len(dummyDB)
+	// Compare size of dummy DB to check for insert.
+	if initialLen >= finalLen {
+		return fmt.Errorf("error in DB insert for article")
+	}
+
+	return nil
+}
