@@ -23,6 +23,7 @@ func GetAllArticles(w http.ResponseWriter, r *http.Request) {
 	articlesResponse, err := articleUsecase.GetAllArticles()
 	if err != nil {
 		fmt.Fprintf(w, err.Error())
+		return
 	}
 
 	// Empty DB error case
@@ -66,6 +67,7 @@ func PostArticles(w http.ResponseWriter, r *http.Request) {
 	err = articleUsecase.PostArticle(*article)
 	if err != nil {
 		fmt.Fprintf(w, err.Error())
+		return
 	}
 
 	// Success
