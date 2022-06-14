@@ -1,2 +1,2 @@
-# pimen_rest_api_go
+# GO API
 Golang REST API to learn end to end development.
