@@ -6,30 +6,11 @@ import (
 	"log"
 	"net/http"
 
+	lambdaFuncs "src/api/domain/lambda/entities"
+
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/gorilla/mux"
 )
-
-// Entities por lambda function Request and Response.
-type (
-	Request struct {
-		ID    float64 `json:"id"`
-		Value string  `json:"value"`
-	}
-
-	Response struct {
-		Message string `json:"message"`
-		Ok      bool   `json:"ok"`
-	}
-)
-
-// Handler for lambda function, we use this name to show the difference between handlers.
-func HandlerLambda(request Request) (Response, error) {
-	return Response{
-		Message: fmt.Sprintf("Process request ID %f", request.ID),
-		Ok:      true,
-	}, nil
-}
 
 // Entities for article functionalities.
 type (
@@ -85,5 +66,5 @@ func main() {
 	handleRequests()
 
 	// Initialization for lambda functions.
-	lambda.Start(HandlerLambda)
+	lambda.Start(lambdaFuncs.HandlerLambda)
 }
