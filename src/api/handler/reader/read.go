@@ -11,7 +11,7 @@ import (
 )
 
 // HandleRequests function to route endpoints to their handlers.
-func HandleRequests() {
+func HandleReadRequests() {
 
 	myRouter := mux.NewRouter().StrictSlash(true)
 
