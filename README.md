@@ -1,2 +1,5 @@
-# GO API
-Golang REST API to learn end to end development.
+# MK1 Ecosystem 
+
+## Article Engine
+
+Golang REST API that generates, modyfies and deletes articles.

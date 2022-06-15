@@ -10,7 +10,7 @@ import (
 	articleUsecase "github.com/MARTINPIMENTA/pimen_rest_api_go/src/api/domain/article/usecases"
 )
 
-// AllArticles returns the array of articles.
+// GetAllArticles returns the array of articles.
 func GetAllArticles(w http.ResponseWriter, r *http.Request) {
 	// Verify request is not empty
 	err := verifyValidRequest(r)
@@ -38,7 +38,7 @@ func GetAllArticles(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(articlesResponse)
 }
 
-// PostArticles only returns a message.
+// PostArticles sends articles to DB.
 func PostArticles(w http.ResponseWriter, r *http.Request) {
 	// Verify request is not empty
 	err := verifyValidRequest(r)
