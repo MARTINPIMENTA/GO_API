@@ -2,4 +2,4 @@
 
 ## Article Engine
 
-Golang REST API that generates, modyfies and deletes articles.
+Golang REST API that generates, modifies and deletes articles.
