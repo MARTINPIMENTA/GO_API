@@ -71,6 +71,7 @@ func PostArticles(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Success
+	fmt.Println("Endpoint Hit: Article posted successfully")
 	fmt.Fprintf(w, "Article Posted!")
 }
 
@@ -80,9 +81,10 @@ func PostArticles(w http.ResponseWriter, r *http.Request) {
 
 }*/
 
+// verifyValidRequest checks that the request is not empty.
 func verifyValidRequest(r *http.Request) error {
 	if r == nil {
-		return fmt.Errorf("Request error")
+		return fmt.Errorf("request error")
 	}
 	return nil
 }

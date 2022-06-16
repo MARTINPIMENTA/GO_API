@@ -3,8 +3,6 @@ package database
 import (
 	"fmt"
 
-	"database/sql"
-
 	articleEntities "github.com/MARTINPIMENTA/pimen_rest_api_go/src/api/domain/article/entities"
 )
 
@@ -19,12 +17,12 @@ func GetAllArticlesFromDB() (articleEntities.Articles, error) {
 	}
 
 	// DB connection.
-	db, err := sql.Open("mysql", "root:root(127.0.0.1:8080/MK1Con)")
-	if err != nil {
-		return nil, err
-	}
-	// defer close function for DB when finished.
-	defer db.Close()
+	// db, err := sql.Open("mysql", "root:root(127.0.0.1:8080/MK1Con)")
+	// if err != nil {
+	// 	return nil, err
+	// }
+	// // defer close function for DB when finished.
+	// defer db.Close()
 
 	return articlesResponse, nil
 
