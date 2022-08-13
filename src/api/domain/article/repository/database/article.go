@@ -10,7 +10,7 @@ import (
 var dummyDB articleEntities.Articles
 
 // GetAllArticlesFromDB gets articles from DB.
-func GetAllArticlesFromDB() (articleEntities.Articles, error) {
+func (articleDatabase *articleDatabase) GetAllArticlesFromDB() (articleEntities.Articles, error) {
 	articlesResponse := dummyDB
 	if len(articlesResponse) == 0 {
 		return nil, fmt.Errorf("error getting articles from DB")
@@ -29,7 +29,7 @@ func GetAllArticlesFromDB() (articleEntities.Articles, error) {
 }
 
 // PostArticleIntoDB inserts articles into DB.
-func PostArticleIntoDB(article articleEntities.Article) error {
+func (articleDatabase *articleDatabase) PostArticleIntoDB(article articleEntities.Article) error {
 	initialLen := len(dummyDB)
 	dummyDB = append(dummyDB, article)
 	finalLen := len(dummyDB)

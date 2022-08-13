@@ -7,11 +7,10 @@ import (
 	"net/http"
 
 	articleEntities "github.com/MARTINPIMENTA/pimen_rest_api_go/src/api/domain/article/entities"
-	articleUsecase "github.com/MARTINPIMENTA/pimen_rest_api_go/src/api/domain/article/usecases"
 )
 
 // GetAllArticles returns the array of articles.
-func GetAllArticles(w http.ResponseWriter, r *http.Request) {
+func (handler *articleHTTPHandler) GetAllArticles(w http.ResponseWriter, r *http.Request) {
 	// Verify request is not empty
 	err := verifyValidRequest(r)
 	if err != nil {
@@ -20,7 +19,7 @@ func GetAllArticles(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Go to usecase directly because there is no specific article.
-	articlesResponse, err := articleUsecase.GetAllArticles()
+	articlesResponse, err := handler.usecase.GetAllArticles()
 	if err != nil {
 		fmt.Fprintf(w, err.Error())
 		return
@@ -39,7 +38,7 @@ func GetAllArticles(w http.ResponseWriter, r *http.Request) {
 }
 
 // PostArticles sends articles to DB.
-func PostArticles(w http.ResponseWriter, r *http.Request) {
+func (handler *articleHTTPHandler) PostArticles(w http.ResponseWriter, r *http.Request) {
 	// Verify request is not empty
 	err := verifyValidRequest(r)
 	if err != nil {
@@ -64,7 +63,7 @@ func PostArticles(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Go to usecase for article post.
-	err = articleUsecase.PostArticle(*article)
+	err = handler.usecase.PostArticle(*article)
 	if err != nil {
 		fmt.Fprintf(w, err.Error())
 		return

@@ -4,13 +4,12 @@ import (
 	"fmt"
 
 	articleEntities "github.com/MARTINPIMENTA/pimen_rest_api_go/src/api/domain/article/entities"
-	articleRepository "github.com/MARTINPIMENTA/pimen_rest_api_go/src/api/domain/article/repository"
 )
 
-func GetAllArticles() (articleEntities.Articles, error) {
+func (usecase *articleUsecase) GetAllArticles() (articleEntities.Articles, error) {
 	// Usecase doesn`t do much in this case, there are no parameters to check.
 	// Go to repository and check for errors.
-	articlesResponse, err := articleRepository.GetAllArticles()
+	articlesResponse, err := usecase.repository.GetAllArticles()
 	if err != nil {
 		return nil, err
 	}
@@ -19,14 +18,14 @@ func GetAllArticles() (articleEntities.Articles, error) {
 }
 
 // PostArticleIntoDB inserts articles into DB.
-func PostArticle(article articleEntities.Article) error {
+func (usecase *articleUsecase) PostArticle(article articleEntities.Article) error {
 	// Check if the article is valid.
 	if !isValidArticle(article) {
 		return fmt.Errorf("invalid article, empty title")
 	}
 
 	// Send article for insert to repository layer.
-	err := articleRepository.PostArticle(article)
+	err := usecase.repository.PostArticle(article)
 	if err != nil {
 		return fmt.Errorf(err.Error())
 	}
